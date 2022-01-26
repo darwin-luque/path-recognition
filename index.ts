@@ -44,3 +44,7 @@ export default function pathRecognition(
 
   return { match: undefined, params: {} };
 }
+
+export function pathTrimmer(path: string) {
+  return path.replace(/^\/+|\/+$/g, '');
+}
