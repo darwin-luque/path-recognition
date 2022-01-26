@@ -1,0 +1,26 @@
+{
+  "name": "path-recognition",
+  "version": "0.0.1",
+  "description": "Package to recognize to which path a given url belongs to",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darwin-luque/path-recognition.git"
+  },
+  "keywords": [
+    "path-recognition",
+    "url"
+  ],
+  "author": "Darwin Luque",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darwin-luque/path-recognition/issues"
+  },
+  "homepage": "https://github.com/darwin-luque/path-recognition#readme",
+  "devDependencies": {
+    "@types/node": "^17.0.12"
+  }
+}
