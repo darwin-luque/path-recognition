@@ -1,3 +1,5 @@
+import { URL } from 'url';
+
 export interface PathRecognition {
   match: string | undefined;
   params: { [key: string]: string };
@@ -47,4 +49,16 @@ export default function pathRecognition(
 
 export function pathTrimmer(path: string) {
   return path.replace(/^\/+|\/+$/g, '');
+}
+
+export function extractPathname(
+  host: string,
+  url: string,
+  protocol: 'http' | 'https' = 'http'
+) {
+  const baseUrl = `${protocol}://${host}`;
+
+  const { pathname } = new URL(url, baseUrl);
+
+  return pathname;
 }
