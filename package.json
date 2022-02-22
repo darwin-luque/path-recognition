@@ -19,8 +19,5 @@
   "bugs": {
     "url": "https://github.com/darwin-luque/path-recognition/issues"
   },
-  "homepage": "https://github.com/darwin-luque/path-recognition#readme",
-  "devDependencies": {
-    "@types/node": "^17.0.12"
-  }
+  "homepage": "https://github.com/darwin-luque/path-recognition#readme"
 }

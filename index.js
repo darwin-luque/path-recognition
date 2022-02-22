@@ -1,8 +1,6 @@
-export interface PathRecognition {
-  match: string | undefined;
-  params: { [key: string]: string };
-}
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.pathTrimmer = void 0;
 /**
  * ## Path Recognition
  *
@@ -24,52 +22,33 @@ export interface PathRecognition {
  * @param {string[]} possiblePaths List of paths to which the url should match to
  * @returns {PathRecognition} Object with the matched path (undefined if not find), and the params found when comparing with a dynamic route.
  */
-export default function pathRecognition(
-  url: string,
-  possiblePaths: string[],
-  dynamicRouteIdentifier = ':'
-): PathRecognition {
-  for (const path of possiblePaths) {
-    if (path === url) {
-      return { match: path, params: {} };
-    }
-
-    const splitPath = path.split('/');
-    const splitUrl = url.split('/');
-
-    if (
-      splitPath.length !== splitUrl.length ||
-      !path.includes(dynamicRouteIdentifier)
-    ) {
-      continue;
-    }
-
-    const metadata = splitPath.reduce<{
-      leftoverLength: number;
-      params: { [key: string]: string };
-    }>(
-      (prev, el, index) => {
-        if (!(el === splitUrl[index] || el.startsWith(':'))) {
-          prev.leftoverLength++;
+function pathRecognition(url, possiblePaths, dynamicRouteIdentifier = ':') {
+    for (const path of possiblePaths) {
+        if (path === url) {
+            return { match: path, params: {} };
         }
-
-        if (el.startsWith(dynamicRouteIdentifier)) {
-          prev.params[el.replace(dynamicRouteIdentifier, '')] = splitUrl[index];
+        const splitPath = path.split('/');
+        const splitUrl = url.split('/');
+        if (splitPath.length !== splitUrl.length ||
+            !path.includes(dynamicRouteIdentifier)) {
+            continue;
         }
-
-        return prev;
-      },
-      { leftoverLength: 0, params: {} }
-    );
-
-    if (metadata.leftoverLength === 0) {
-      return { match: path, params: metadata.params };
+        const metadata = splitPath.reduce((prev, el, index) => {
+            if (!(el === splitUrl[index] || el.startsWith(':'))) {
+                prev.leftoverLength++;
+            }
+            if (el.startsWith(dynamicRouteIdentifier)) {
+                prev.params[el.replace(dynamicRouteIdentifier, '')] = splitUrl[index];
+            }
+            return prev;
+        }, { leftoverLength: 0, params: {} });
+        if (metadata.leftoverLength === 0) {
+            return { match: path, params: metadata.params };
+        }
     }
-  }
-
-  return { match: undefined, params: {} };
+    return { match: undefined, params: {} };
 }
-
+exports.default = pathRecognition;
 /**
  * ## Path trimmer
  *
@@ -78,6 +57,7 @@ export default function pathRecognition(
  * @param {string} path Path to trim
  * @returns {string} Trimmed path
  */
-export function pathTrimmer(path: string): string {
-  return path.replace(/^\/+|\/+$/g, '');
+function pathTrimmer(path) {
+    return path.replace(/^\/+|\/+$/g, '');
 }
+exports.pathTrimmer = pathTrimmer;
