@@ -1,6 +1,6 @@
 {
   "name": "path-recognition",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Package to recognize to which path a given url belongs to",
   "main": "index.js",
   "scripts": {
